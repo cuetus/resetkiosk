@@ -6,9 +6,9 @@
   
     <em:id>resetKiosk@cue</em:id>
     <em:name>Reset Kiosk</em:name>
-    <em:version>0.4</em:version>
+    <em:version>0.5</em:version>
 	<em:type>2</em:type>
-    <em:description>Reset homepage view after inactivity (optionally fullscreen)</em:description>
+    <em:description>Reset homepage view after period of inactivity, aka 'kiosk mode'. Options for forcing fullscreen mode and clearing recent browsing history, cookies and cache.</em:description>
     <em:creator>Esa Viitala</em:creator>
     <em:homepageURL>http://www.viitalat.net/</em:homepageURL>
 
@@ -18,8 +18,8 @@
     <em:targetApplication>
       <Description>
         <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
-        <em:minVersion>2.0</em:minVersion>
-        <em:maxVersion>6.0</em:maxVersion>
+        <em:minVersion>4.*</em:minVersion>
+        <em:maxVersion>32.*</em:maxVersion>
       </Description>
     </em:targetApplication>
 
