@@ -1,0 +1,6 @@
+content	reset-kiosk	content/
+
+overlay chrome://browser/content/browser.xul chrome://reset-kiosk/content/overlay.xul
+
+locale	reset-kiosk	en-US	locale/en-US/
+

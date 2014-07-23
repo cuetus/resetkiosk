@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+ 
+<prefwindow id="reset-kiosk-prefs"
+     title="Reset Kiosk Options"
+     xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+ 
+<prefpane id="reset-kiosk-pane" label="Reset Kiosk Settings">
+  <preferences>
+    <preference id="pref_timeout" name="extensions.resetKiosk.timeoutseconds" type="int"/>
+    <preference id="pref_forceFullscreen" name="extensions.resetKiosk.forceFullscreen" type="bool"/>
+    <preference id="pref_reuseExisting" name="extensions.resetKiosk.reuseExisting" type="bool"/>
+  </preferences>
+
+  <description>Resets browser to currently set homepage after period of inactivity</description>
+ 
+  <groupbox flex="1">
+    <caption label="Options" />
+ 	<hbox align="horizontal">
+		<checkbox label="Force fullscreen" preference="pref_forceFullscreen" id="fullscreen"/>
+  	</hbox>
+ 	<hbox align="horizontal">
+		<checkbox label="Reuse already opened homepage tab" preference="pref_reuseExisting" id="reuse-existing"/>
+  	</hbox>
+  	<hbox align="horizontal">
+  		<label control="timeout" value="Inactivity timeout "/>
+  		<textbox preference="pref_timeout" id="timeoutseconds" maxlength="10"/> seconds
+  	</hbox>
+  </groupbox>
+
+</prefpane>
+ 
+</prefwindow>

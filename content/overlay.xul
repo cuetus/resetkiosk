@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<window id="main-window" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script src="main.js"/> 
+</window>
