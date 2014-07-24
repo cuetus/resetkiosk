@@ -6,3 +6,4 @@ pref("network.manage-offline-status",false);
 pref("extensions.resetKiosk.clearHistory",false);
 pref("extensions.resetKiosk.clearCookies",false);
 pref("extensions.resetKiosk.clearCache",false);
+pref("extensions.resetKiosk.disableContextMenu",false);

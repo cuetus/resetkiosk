@@ -81,8 +81,19 @@ var resetKiosk = {
         	cacheService.evictEntries(Components.interfaces.nsICache.STORE_OFFLINE);
 		}
 
+	},
+	disable : function(event) {
+		event.preventDefault();
+		console.debug('event default disabled');
+	},
+	loadhandler : function(event) {
+		console.debug('load doc ' + event.originalTarget.defaultView.location.href);
+		if (resetKiosk.prefManager.getBoolPref("extensions.resetKiosk.disableContextMenu")) {
+			event.originalTarget.addEventListener("contextmenu", resetKiosk.disable, false);
+		}
 	}
 }
 
 addEventListener("keypress", resetKiosk.init, true);
-addEventListener("mousemove", resetKiosk.init, true);	
+addEventListener("mousemove", resetKiosk.init, true);
+addEventListener("load", resetKiosk.loadhandler, true);

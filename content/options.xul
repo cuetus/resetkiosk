@@ -13,6 +13,7 @@
     <preference id="pref_clearHistory" name="extensions.resetKiosk.clearHistory" type="bool"/>
     <preference id="pref_clearCookies" name="extensions.resetKiosk.clearCookies" type="bool"/>
     <preference id="pref_clearCache" name="extensions.resetKiosk.clearCache" type="bool"/>
+    <preference id="pref_disableContextMenu" name="extensions.resetKiosk.disableContextMenu" type="bool"/>
   </preferences>
  
   <groupbox flex="1">
@@ -32,10 +33,14 @@
  	<hbox align="horizontal">
 		<checkbox label="Clear browser cache" preference="pref_clearCache" id="clear-cache"/>
   	</hbox>
+ 	<hbox align="horizontal">
+		<checkbox label="Disable context menu (right mouse button click)" preference="pref_disableContextMenu" id="clear-cache"/>
+  	</hbox>
   	<hbox align="horizontal">
   		<label control="timeout" value="Inactivity timeout "/>
   		<textbox preference="pref_timeout" id="timeoutseconds" maxlength="10"/> seconds
   	</hbox>
+  	<description>Some options may require browser restart.</description>
   </groupbox>
 
 </prefpane>
