@@ -1,4 +1,5 @@
 
+
 var resetKiosk = {
 	
 	timer	: Components.classes["@mozilla.org/timer;1"]
@@ -8,6 +9,7 @@ var resetKiosk = {
 	                    .getService(Components.interfaces.nsIPrefBranch),
 	
 	init : function() {
+		console.debug('resetKiosk.init');
 		resetKiosk.timer.cancel();
 		resetKiosk.timer.initWithCallback(resetKiosk.perform,
 								resetKiosk.prefManager.getIntPref("extensions.resetKiosk.timeoutseconds")*1000, 
@@ -53,15 +55,27 @@ var resetKiosk = {
 		if (!found) resetKiosk.reloadtab();
 		
 	},
+	checkFullscreen : function() {
+		console.debug('resetKiosk.checkFullscreen');
+		if (!window.fullScreen && resetKiosk.prefManager.getBoolPref("extensions.resetKiosk.forceFullscreen")) {
+			var element = gBrowser.selectedBrowser.contentDocument.documentElement;
+			if (element.mozRequestFullScreen && resetKiosk.prefManager.getBoolPref("extensions.resetKiosk.noNavBar")) {
+				element.mozRequestFullScreen(); // firefox 10 and up
+			} else {
+				window.fullScreen = true; // 1.9 and up. if mozRequestFullScreen was not defined
+			}
+		}
+	},
 	perform : function(event) {
+		console.debug('resetKiosk.perform');
 		if (resetKiosk.prefManager.getBoolPref("extensions.resetKiosk.reuseExisting")) {
 			resetKiosk.reusetab();
 		} else {
 			resetKiosk.reloadtab();
 		}
-		if (resetKiosk.prefManager.getBoolPref("extensions.resetKiosk.forceFullscreen")) {
-			window.fullScreen = true;
-		}
+
+		resetKiosk.checkFullscreen();
+
 		if (resetKiosk.prefManager.getBoolPref("extensions.resetKiosk.clearHistory")) {
 			Components.classes["@mozilla.org/browser/nav-history-service;1"]
                                         .getService(Components.interfaces.nsIBrowserHistory)
@@ -80,20 +94,31 @@ var resetKiosk = {
         	cacheService.evictEntries(Components.interfaces.nsICache.STORE_ON_DISK);
         	cacheService.evictEntries(Components.interfaces.nsICache.STORE_OFFLINE);
 		}
-
+		
 	},
 	disable : function(event) {
+		console.debug('resetKiosk.disable');
 		event.preventDefault();
-		console.debug('event default disabled');
 	},
 	loadhandler : function(event) {
-		console.debug('load doc ' + event.originalTarget.defaultView.location.href);
+		console.debug('resetKiosk.loadhandler doc ' + event.originalTarget.defaultView.location.href);
+		resetKiosk.checkFullscreen();
 		if (resetKiosk.prefManager.getBoolPref("extensions.resetKiosk.disableContextMenu")) {
 			event.originalTarget.addEventListener("contextmenu", resetKiosk.disable, false);
 		}
 	}
 }
 
-addEventListener("keypress", resetKiosk.init, true);
+
+addEventListener("keydown", resetKiosk.init, true);
 addEventListener("mousemove", resetKiosk.init, true);
-addEventListener("load", resetKiosk.loadhandler, true);
+gBrowser.addEventListener("load", resetKiosk.loadhandler, true);
+
+if (resetKiosk.prefManager.getBoolPref("extensions.resetKiosk.stayFullscreen")) {
+	addEventListener("mozfullscreenchange", resetKiosk.checkFullscreen, true); // firefox 10 and up
+}
+
+resetKiosk.init();
+
+
+

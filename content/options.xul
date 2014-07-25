@@ -9,6 +9,8 @@
   <preferences>
     <preference id="pref_timeout" name="extensions.resetKiosk.timeoutseconds" type="int"/>
     <preference id="pref_forceFullscreen" name="extensions.resetKiosk.forceFullscreen" type="bool"/>
+    <preference id="pref_stayFullscreen" name="extensions.resetKiosk.stayFullscreen" type="bool"/>
+    <preference id="pref_noNavbar" name="extensions.resetKiosk.noNavBar" type="bool"/>
     <preference id="pref_reuseExisting" name="extensions.resetKiosk.reuseExisting" type="bool"/>
     <preference id="pref_clearHistory" name="extensions.resetKiosk.clearHistory" type="bool"/>
     <preference id="pref_clearCookies" name="extensions.resetKiosk.clearCookies" type="bool"/>
@@ -18,24 +20,16 @@
  
   <groupbox flex="1">
     <caption label="Resets browser to currently set homepage after period of inactivity" />
- 	<hbox align="horizontal">
-		<checkbox label="Force fullscreen" preference="pref_forceFullscreen" id="fullscreen"/>
-  	</hbox>
- 	<hbox align="horizontal">
-		<checkbox label="Reuse already opened homepage tab" preference="pref_reuseExisting" id="reuse-existing"/>
-  	</hbox>
- 	<hbox align="horizontal">
-		<checkbox label="Clear browsing history" preference="pref_clearHistory" id="clear-history"/>
-  	</hbox>
- 	<hbox align="horizontal">
-		<checkbox label="Clear cookies" preference="pref_clearCookies" id="clear-cookies"/>
-  	</hbox>
- 	<hbox align="horizontal">
-		<checkbox label="Clear browser cache" preference="pref_clearCache" id="clear-cache"/>
-  	</hbox>
- 	<hbox align="horizontal">
-		<checkbox label="Disable context menu (right mouse button click)" preference="pref_disableContextMenu" id="clear-cache"/>
-  	</hbox>
+ 	<checkbox onclick="checkboxstatus();" label="Reset to fullscreen mode" preference="pref_forceFullscreen" id="fullscreen"/>
+	<groupbox>
+ 	<checkbox label="Re-enter fullscreen mode on exit (Firefox 10+)" preference="pref_stayFullscreen" id="stayfullscreen"/>
+	<checkbox label="Hide navigation controls in fullscreen mode (Firefox 10+)" preference="pref_noNavbar" id="nonavbar"/>
+	</groupbox>
+ 	<checkbox label="Reuse already opened homepage tab" preference="pref_reuseExisting" id="reuse-existing"/>
+ 	<checkbox label="Clear browsing history" preference="pref_clearHistory" id="clear-history"/>
+ 	<checkbox label="Clear cookies" preference="pref_clearCookies" id="clear-cookies"/>
+ 	<checkbox label="Clear browser cache" preference="pref_clearCache" id="clear-cache"/>
+ 	<checkbox label="Disable context menu (right mouse button click)" preference="pref_disableContextMenu" id="clear-cache"/>
   	<hbox align="horizontal">
   		<label control="timeout" value="Inactivity timeout "/>
   		<textbox preference="pref_timeout" id="timeoutseconds" maxlength="10"/> seconds
@@ -45,6 +39,22 @@
 
 </prefpane>
 
+<script type="application/javascript">
+  <![CDATA[
+  
+  	var fullscreen = document.getElementById('fullscreen');
+  	var stayfullscreen = document.getElementById('stayfullscreen');
+  	var nonavbar = document.getElementById('nonavbar');
+  
+	function checkboxstatus() {
+		stayfullscreen.disabled = fullscreen.checked;
+		nonavbar.disabled = fullscreen.checked;
+	}
+	
+	stayfullscreen.disabled = !fullscreen.checked;
+	nonavbar.disabled = !fullscreen.checked;	
 
+  ]]>
+</script>
  
 </prefwindow>
