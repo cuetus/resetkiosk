@@ -6,7 +6,7 @@
   
     <em:id>resetKiosk@cue</em:id>
     <em:name>Reset Kiosk</em:name>
-    <em:version>0.5</em:version>
+    <em:version>0.6</em:version>
 	<em:type>2</em:type>
     <em:description>Reset homepage view after period of inactivity, aka 'kiosk mode'. Options for forcing fullscreen mode and clearing recent browsing history, cookies and cache.</em:description>
     <em:creator>Esa Viitala</em:creator>
