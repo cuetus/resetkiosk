@@ -1,7 +1,7 @@
 pref("extensions.resetKiosk.timeoutseconds", 60);
-pref("extensions.resetKiosk.forceFullscreen", true);
-pref("extensions.resetKiosk.noNavBar", true);
-pref("extensions.resetKiosk.stayFullscreen", true);
+pref("extensions.resetKiosk.forceFullscreen", false);
+pref("extensions.resetKiosk.noNavBar", false);
+pref("extensions.resetKiosk.stayFullscreen", false);
 pref("extensions.resetKiosk.reuseExisting",false);
 pref("browser.tabs.warnOnClose",false);
 pref("network.manage-offline-status",false);
